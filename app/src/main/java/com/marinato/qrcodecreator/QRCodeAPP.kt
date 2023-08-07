@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.getValue
@@ -21,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -35,7 +38,8 @@ fun QRCodeApp() {
 
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = Modifier.padding(horizontal = 20.dp)) {
         Text(
             "Gerador de QRCode",
             textAlign = TextAlign.Center
@@ -56,18 +60,25 @@ fun QRCodeApp() {
                     shape = RoundedCornerShape(10.dp)
                 )
                 .fillMaxWidth(),
-
+            placeholder = {
+                          Text(text = " Inforome o texto",
+                          textAlign = TextAlign.Center,
+                          modifier = Modifier.fillMaxWidth())
+            },
+            shape = RoundedCornerShape(10.dp),
+            color = TextFieldDefaults.textFieldColors(
+                containerColor = Color.White
+            ),
             onValueChange = {
             textValue = it
         })
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun QRCodeAppPreview() {
-    QRCodeCreatorTheme {
+    QRCodeCreatorTheme(dynamicColor = false) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
