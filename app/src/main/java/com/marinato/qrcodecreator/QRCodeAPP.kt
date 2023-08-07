@@ -1,8 +1,12 @@
 package com.marinato.qrcodecreator
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +26,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.marinato.qrcodecreator.ui.theme.PurpleGrey80
 import com.marinato.qrcodecreator.ui.theme.QRCodeCreatorTheme
 
 @Composable
@@ -31,7 +36,8 @@ fun QRCodeApp() {
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Gerador de QRCode",
+        Text(
+            "Gerador de QRCode",
             textAlign = TextAlign.Center
         )
 
@@ -41,7 +47,17 @@ fun QRCodeApp() {
             modifier = Modifier.size(300.dp)
         )
 
-        TextField(value = textValue, onValueChange = {
+        TextField(
+            value = textValue,
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    color = PurpleGrey80,
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .fillMaxWidth(),
+
+            onValueChange = {
             textValue = it
         })
 
