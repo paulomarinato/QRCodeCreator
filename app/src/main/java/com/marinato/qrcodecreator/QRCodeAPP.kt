@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -39,8 +40,10 @@ fun QRCodeApp() {
 
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = Modifier.padding(horizontal = 20.dp)) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(horizontal = 20.dp)
+    ) {
         Text(
             "Gerador de QRCode",
             textAlign = TextAlign.Center
@@ -62,35 +65,49 @@ fun QRCodeApp() {
                 )
                 .fillMaxWidth(),
             placeholder = {
-                          Text(text = "Inforome o texto",
-                          textAlign = TextAlign.Center,
-                          modifier = Modifier.fillMaxWidth())
+                Text(
+                    text = "Inforome o texto",
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
             },
             shape = RoundedCornerShape(10.dp),
             color = TextFieldDefaults.textFieldColors(
                 containerColor = Color.White
             ),
             onValueChange = {
-            textValue = it
-        })
+                textValue = it
+            })
 
         Spacer(Modifier.height(20.dp))
-        
+
         Button(onClick = { /*TODO*/ }) {
             Text("teste")
-            
+
         }
     }
 }
 
 @Composable
-fun RoundedButton(onClick: () -> Unit, enabled: Boolean){
+fun RoundedButton(
+    onClick: () -> Unit,
+    enabled: Boolean,
+    text: String,
+    color: Color,
+    ) {
     Button(
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(10.dp),
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color,
+            contentColor = Color.Blue
+        )
+
     ) {
-        
+        Text(test, modifier = Modifier.padding(vertical = 6dp))
+
     }
 }
 
