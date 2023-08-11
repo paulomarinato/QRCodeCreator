@@ -106,7 +106,10 @@ fun RoundedButton(
         )
 
     ) {
-        Text(test, modifier = Modifier.padding(vertical = 6dp))
+        Text(
+            text, modifier = Modifier.padding(vertical = 6.dp),
+            color = Color.Black
+        )
 
     }
 }
