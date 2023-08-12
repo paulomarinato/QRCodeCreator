@@ -81,7 +81,8 @@ fun QRCodeApp() {
 
         Spacer(Modifier.height(20.dp))
 
-        RoundedButton(onClick = { /*TODO*/ },
+        RoundedButton(
+            onClick = { /*TODO*/ },
             enabled = true,
             text = "Gerar QR Code",
             color = Color.Green
@@ -95,7 +96,7 @@ fun RoundedButton(
     enabled: Boolean,
     text: String,
     color: Color,
-    ) {
+) {
     Button(
         onClick = onClick,
         enabled = enabled,
