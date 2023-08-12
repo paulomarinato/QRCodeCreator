@@ -1,6 +1,7 @@
 package com.marinato.qrcodecreator
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,60 +34,63 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marinato.qrcodecreator.ui.theme.PurpleGrey80
 import com.marinato.qrcodecreator.ui.theme.QRCodeCreatorTheme
+import javax.net.ssl.HostnameVerifier
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun QRCodeApp() {
 
     var textValue by remember { mutableStateOf(TextFieldValue("")) }
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(horizontal = 20.dp)
+        modifier = Modifier.padding(horizontal = 20.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
     ) {
-        Text(
-            "Gerador de QRCode",
-            textAlign = TextAlign.Center
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Criar QRCode",
+                textAlign = TextAlign.Center
+            )
 
-        Icon(
-            painter = painterResource(id = R.drawable.baseline_qr_code_scanner_24),
-            contentDescription = "",
-            modifier = Modifier.size(300.dp)
-        )
+            Icon(painter = painterResource(id = R.drawable.baseline_qr_code_scanner_24),
+                contentDescription = "",
+                modifier = Modifier.size(250.dp)
+            )
+        }
+        
+        Column {
+            TextField(
+                value = textValue,
+                modifier = Modifier
+                    .border(
+                        width = 2.dp,
+                        color = PurpleGrey80,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .fillMaxWidth(),
+                placeholder = {
+                    Text(
+                        text = "Inforome o texto",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                },
+                shape = RoundedCornerShape(10.dp),
+                color = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.White
+                ),
+                onValueChange = {
+                    textValue = it
+                })
 
-        TextField(
-            value = textValue,
-            modifier = Modifier
-                .border(
-                    width = 2.dp,
-                    color = PurpleGrey80,
-                    shape = RoundedCornerShape(10.dp)
-                )
-                .fillMaxWidth(),
-            placeholder = {
-                Text(
-                    text = "Inforome o texto",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
-            shape = RoundedCornerShape(10.dp),
-            color = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White
-            ),
-            onValueChange = {
-                textValue = it
-            })
+            Spacer(Modifier.height(20.dp))
 
-        Spacer(Modifier.height(20.dp))
-
-        RoundedButton(
-            onClick = { /*TODO*/ },
-            enabled = true,
-            text = "Gerar QR Code",
-            color = Color.Green
-        )
+            RoundedButton(
+                onClick = { /*TODO*/ },
+                enabled = true,
+                text = "Gerar QR Code",
+                color = Color.Green
+            )
+        }
     }
 }
 
